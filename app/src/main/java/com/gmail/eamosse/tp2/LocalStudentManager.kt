@@ -6,7 +6,7 @@ class LocalStudentManager : StudentManager {
     // TODO 2: init the class with a list of 10 students every time a new instance is created;
     // Use the followi
 
-    var students = listOf(
+    var students: List<Student> = listOf(
         Student(name = "John1", code = "A1", sexe = "M", address = "Lilles", age = 20),
         Student(name = "John2", code = "A2", sexe = "F", address = "Lilles", age = 30),
         Student(name = "John3", code = "A3", sexe = "F", address = "Lilles", age = 41),
@@ -28,8 +28,8 @@ class LocalStudentManager : StudentManager {
             "asc" -> return this.listOf10().sortedBy { it.age }
             "desc" -> return this.listOf10().sortedByDescending { it.age }
             else -> {
-                println("The type '$type' is incorrect")
-                return this.listOf10()
+                println("The type '$type' is incorrect, please use 'asc' or 'desc'")
+                return listOf()
             }
         }
     }
@@ -39,11 +39,6 @@ class LocalStudentManager : StudentManager {
     }
 
     override fun boysOrGirls(sexe: String): List<Student> {
-        val availableSexe = listOf("M", "F")
-        if (sexe.uppercase() !in availableSexe){
-            println("The sexe '$sexe' is incorrect")
-            return this.listOf10()
-        }
         return this.listOf10().filter { it.sexe == sexe.uppercase() }
     }
 
@@ -60,6 +55,6 @@ class LocalStudentManager : StudentManager {
     }
 
     override fun clear() {
-        students = this.listOf10().filter { false }
+        students = listOf()
     }
 }
